@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8082;
 
 const baseUrl = '/calculator'
 
@@ -10,16 +10,22 @@ app.use(express.json());
 const baseRouter = express.Router();
 
 baseRouter.get('/greeting', (req, res) => {
-    return res.send('');
+    return res.send('hello user');
 });
 
 baseRouter.post('/add', (req, res) => {
-    res.json({ "": null });
+    const {first,second} =req.body;
+    const reslt=first+second;
+    res.json({result:reslt});
 });
 
 
+
 baseRouter.post('/subtract', (req, res) => {
-    res.json({ "": null });
+    const {first,second} =req.body;
+    const reslt=first-second;
+    res.json({result:reslt});
+    
 });
 
 app.use(baseUrl, baseRouter);
